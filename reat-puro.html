@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Puro no HTML</title>
+    
+    <!-- 1. Links corretos do React e React-DOM (Versão 18) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- 2. Link correto do Babel Standalone para processar JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 3. Div onde o React vai injetar o app -->
+    <div id="root"></div>
+
+    <!-- 4. Script com o type correto para o Babel funcionar -->
+    <script type="text/babel">
+        
+        function App() {
+            const [cliques, setCliques] = React.useState(0);
+
+            return (
+                <div className="card">
+                    <h1>Olá, React Puro! ⚛️</h1>
+                    <p>O código foi corrigido e agora já funciona direto no navegador.</p>
+                    <button onClick={() => setCliques(cliques + 1)}>
+                        Contador: {cliques}
+                    </button>
+                </div>
+            );
+        }
+
+        // Renderização oficial do React 18
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<App />);
+
+    </script>
+
+</body>
+</html>
+
