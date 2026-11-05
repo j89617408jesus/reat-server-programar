@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle React Pro</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --react-blue: #00d8ff;
+            --terminal-bg: #050b14;
+            --green: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 95vh;
+        }
+
+        @media (max-width: 900px) {
+            body { grid-template-columns: 1fr; height: auto; }
+        }
+
+        .panel {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        h1, h2 {
+            color: var(--react-blue);
+            margin-top: 0;
+        }
+
+        .command-group {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .command-title {
+            font-weight: bold;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .code-box {
+            background-color: #090d16;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #334155;
+        }
+
+        .code-box code {
+            color: #e2e8f0;
+        }
+
+        .btn-copy {
+            background-color: var(--react-blue);
+            color: #0f172a;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .btn-copy:hover {
+            opacity: 0.9;
+        }
+
+        /* Simulador de Terminal */
+        .terminal-box {
+            background-color: var(--terminal-bg);
+            border-radius: 8px;
+            flex-grow: 1;
+            padding: 15px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #334155;
+        }
+
+        .terminal-header {
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 5px;
+        }
+
+        .terminal-output {
+            white-space: pre-wrap;
+            flex-grow: 1;
+            color: #a7f3d0;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        .terminal-line {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .prompt {
+            color: var(--green);
+            margin-right: 10px;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: inherit;
+            font-size: 16px;
+            flex-grow: 1;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAINEL ESQUERDO: COMANDOS REAIS DO REACT -->
+    <div class="panel">
+        <h1>Guia de Comandos React ⚛️</h1>
+        <p>Copia os comandos abaixo e cola-os no terminal do teu PC real para criares o teu ecossistema profissional.</p>
+
+        <div class="command-group">
+            <div class="command-title">1. Verificar se tens o Node.js instalado</div>
+            <div class="code-box">
+                <code>node -v</code>
+                <button class="btn-copy" onclick="copyCode('node -v')">Copiar</button>
+            </div>
+        </div>
+
+        <div class="command-group">
+            <div class="command-title">2. Criar novo projeto React via Vite (Substitui 'meu-app')</div>
+            <div class="code-box">
+                <code>npm create vite@latest meu-app -- --template react</code>
+                <button class="btn-copy" onclick="copyCode('npm create vite@latest meu-app -- --template react')">Copiar</button>
+            </div>
+        </div>
+
+        <div class="command-group">
+            <div class="command-title">3. Entrar na pasta criada pelo Vite</div>
+            <div class="code-box">
+                <code>cd meu-app</code>
+                <button class="btn-copy" onclick="copyCode('cd meu-app')">Copiar</button>
+            </div>
+        </div>
+
+        <div class="command-group">
+            <div class="command-title">4. Instalar as dependências do React</div>
+            <div class="code-box">
+                <code>npm install</code>
+                <button class="btn-copy" onclick="copyCode('npm install')">Copiar</button>
+            </div>
+        </div>
+
+        <div class="command-group">
+            <div class="command-title">5. Iniciar o Servidor Local (Para veres o teu código no navegador)</div>
+            <div class="code-box">
+                <code>npm run dev</code>
+                <button class="btn-copy" onclick="copyCode('npm run dev')">Copiar</button>
+            </div>
+        </div>
+
+        <div class="command-group">
+            <div class="command-title">6. Compilar o site para colocar na Internet (Gera a pasta /dist)</div>
+            <div class="code-box">
+                <code>npm run build</code>
+                <button class="btn-copy" onclick="copyCode('npm run build')">Copiar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAINEL DIREITO: SIMULADOR DE TREINO DO TERMINAL -->
+    <div class="panel">
+        <h2>Simulador de Terminal (Treino)</h2>
+        <p>Treina a digitação ou testa os comandos colando-os aqui para veres o resultado esperado de um ambiente real:</p>
+        
+        <div class="terminal-box">
+            <div class="terminal-header">MICROSOFT WINDOWS POP-UP SIMULATOR [VERSION 10.0.2026]</div>
+            <div class="terminal-output" id="output">Escreve 'help' ou cola um comando abaixo e pressiona Enter...</div>
+            
+            <div class="terminal-line">
+                <span class="prompt">C:\Users\Desenvolvedor></span>
+                <input type="text" class="terminal-input" id="input" autocomplete="off" autofocus>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para copiar comandos para a tua área de transferência real
+        function copyCode(text) {
+            navigator.clipboard.writeText(text);
+            alert("Comando copiado! Agora podes colá-lo no terminal do teu PC (Ctrl + V).");
+        }
+
+        // Sistema lógico do Simulador de Terminal
+        const input = document.getElementById('input');
+        const output = document.getElementById('output');
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const command = input.value.trim();
+                let response = `\n> ${command}\n`;
+
+                switch(command) {
+                    case 'help':
+                        response += "Comandos disponíveis de simulação:\n - node -v\n - npm create vite@latest meu-app -- --template react\n - cd meu-app\n - npm install\n - npm run dev\n - clear";
+                        break;
+                    case 'node -v':
+                        response += "v20.11.0 (Node está ativo no teu PC!)";
+                        break;
+                    case 'npm create vite@latest meu-app -- --template react':
+                        response += "✔ Scaffolding project in C:\\Users\\Desenvolvedor\\meu-app...\nDone. Now run:\n  cd meu-app\n  npm install\n  npm run dev";
+                        break;
+                    case 'cd meu-app':
+                        response += "Pasta alterada com sucesso.\nDiretório atual: C:\\Users\\Desenvolvedor\\meu-app>";
+                        break;
+                    case 'npm install':
+                        response += "added 184 packages, and audited 185 packages in 4s\nfound 0 vulnerabilities (Sucesso!)";
+                        break;
+                    case 'npm run dev':
+                        response += "  VITE v5.0.0  ready in 234 ms\n\n  ➜  Local:   http://localhost:5173/\n  ➜  Network: use --host to expose\n  ➜  press h + enter to show help";
+                        break;
+                    case 'clear':
+                        output.textContent = '';
+                        response = 'Terminal limpo.';
+                        break;
+                    case '':
+                        response = '';
+                        break;
+                    default:
+                        response += `Erro: Comando '${command}' não reconhecido. Digita 'help' para saberes o que testar.`;
+                }
+
+                output.textContent += response;
+                input.value = '';
+                output.scrollTop = output.scrollHeight; // Auto-scroll
+            }
+        });
+    </script>
+</body>
+</html>
