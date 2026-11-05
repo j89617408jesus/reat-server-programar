@@ -1,0 +1,59 @@
+<html>
+<meta charset="utf-8">
+<div id="demo"></div>
+
+<script>
+// Variável global para guardar o teu link pai da base de dados
+let linkPaiBaseDados = "";
+
+// Super função conection
+async function conection() {
+    // 1. Pede o link se ainda não estiver guardado
+    if (!linkPaiBaseDados) {
+        linkPaiBaseDados = prompt("Insira o seu Link Pai da Base de Dados:");
+    }
+
+    if (!linkPaiBaseDados) {
+        alert("Conexão cancelada: Nenhum link foi inserido.");
+        return;
+    }
+
+    console.log(`A iniciar ligação ao servidor pai: ${linkPaiBaseDados}`);
+    demo.innerHTML += "<br>🔄 A conectar à base de dados...";
+
+    try {
+        // 2. Faz a chamada real para o teu link/API
+        const resposta = await fetch(linkPaiBaseDados);
+        
+        if (resposta.ok) {
+            const dados = await resposta.json();
+            alert("✅ Conectado com sucesso à Base de Dados!");
+            console.log("Dados recebidos:", dados);
+            demo.innerHTML += "<br>✅ Conectado e dados carregados!";
+        } else {
+            alert(`⚠️ Erro de resposta do servidor: ${resposta.status}`);
+        }
+    } catch (erro) {
+        // Se for um link de teste ou der erro de CORS, apanha o erro aqui
+        alert(`❌ Erro ao conectar ao Link Pai! Verifique o console ou permissões CORS.`);
+        console.error("Erro na conexão:", erro);
+        demo.innerHTML += "<br>❌ Falha na conexão.";
+    }
+}
+
+// Escuta a tecla Z de forma garantida em qualquer parte da página
+window.addEventListener("keydown", function(event) {
+    if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+        return;
+    }
+    
+    if (event.key === "z" || event.key === "Z") {
+        conection();
+    }
+});
+
+const demo = document.getElementById("demo");
+demo.innerHTML = ` Resultado da conta é <br> : ${23*45/6} `;
+
+</script>
+</html>
