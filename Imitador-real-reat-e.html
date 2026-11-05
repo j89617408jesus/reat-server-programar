@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solução Real 100% Estável</title>
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; font-family: monospace; padding: 24px; font-size: 14px; }
+        .card { max-width: 440px; margin: 0 auto; background-color: #1e293b; padding: 24px; rounded-radius: 8px; border: 1px solid #334155; border-radius: 8px; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+        .title { font-size: 18px; font-weight: bold; color: #22d3ee; border-bottom: 1px solid #334155; padding-bottom: 8px; margin-bottom: 16px; }
+        .box { background-color: #020617; padding: 12px; border-radius: 6px; border: 1px solid #1e293b; margin-bottom: 16px; }
+        .green { color: #34d399; font-weight: bold; }
+        .log-box { background-color: #042f2e; border: 1px solid #115e59; padding: 12px; border-radius: 6px; font-size: 12px; margin-bottom: 16px; }
+        .list-item { background-color: #334155; padding: 8px; border-radius: 6px; cursor: pointer; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+        .list-item:hover { background-color: #475569; }
+        .btn-text { color: #22d3ee; font-weight: bold; font-size: 12px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid #334155; padding-top: 16px; }
+        .media-label { font-size: 10px; color: #64748b; margin-bottom: 4px; display: block; }
+        .media-box { width: 100%; height: 96px; border-radius: 6px; border: 1px solid #475569; background-color: #020617; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- 1. COMPONENTE DE TÍTULO -->
+        <div class="title" id="app-title"></div>
+        
+        <!-- 2. BLOCO DE CONTAS E CONDICIONAIS (IF) -->
+        <div class="box">
+            <p id="info-preco-base"></p>
+            <p id="info-desconto"></p>
+            <p class="green" id="info-preco-final"></p>
+            <p style="margin-top: 8px; font-size: 12px; color: #94a3b8;" id="info-status"></p>
+        </div>
+
+        <!-- 3. PAINEL GERADO PELA SUPER FUNCTION -->
+        <div class="log-box">
+            <span style="color: #22d3ee; font-weight: bold; display: block; margin-bottom: 4px;">📊 SUPER_MONITOR_LOG:</span>
+            <p>Nó Selecionado: <span style="color: #fbbf24; font-weight: bold;" id="log-ativo">Nenhum</span></p>
+        </div>
+
+        <!-- 4. BLOCO DO LOOP (ARRAY) -->
+        <div style="margin-bottom: 16px;">
+            <span style="font-size: 12px; color: #64748b; display: block; margin-bottom: 8px;">// Iteração de Array Ativo:</span>
+            <div id="lista-servidores"></div>
+        </div>
+
+        <!-- 5. MULTIMÉDIA MULTI-ESTÁVEL -->
+        <div class="grid">
+            <div>
+                <span class="media-label">hardware_graph.svg</span>
+                <svg class="media-box" style="color: #22d3ee; padding: 8px; box-sizing: border-box;" viewBox="0 0 100 50">
+                    <polyline fill="none" stroke="currentColor" stroke-width="2" points="0,40 20,30 40,35 60,10 80,25 100,5"></polyline>
+                </svg>
+            </div>
+            <div>
+                <span class="media-label">live_feed.mp4</span>
+                <iframe class="media-box" src="https://youtube.com" title="Stream" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ======= ESTADO E VARIÁVEIS COMPACTAS =======
+        const titulo = "Módulo Estrutural Core";
+        const precoBase = 300;
+        const desconto = 60;
+        const precoFinal = precoBase - desconto; // Conta direta
+        const stock = 5;
+
+        // ARRAY DE DADOS
+        const servidores = ["Servidor Central", "Nó de Segurança", "Backup Global"];
+
+        // ======= SUPER FUNCTION (ATUALIZAÇÃO DE INTERFACE) =======
+        function gerirSelecao(nomeServidor) {
+            document.getElementById('log-ativo').innerText = nomeServidor;
+        }
+
+        // ======= INICIALIZAÇÃO DA INTERFACE (MIMIC REACT RENDER) =======
+        // Injetar variáveis e contas
+        document.getElementById('app-title').innerText = titulo;
+        document.getElementById('info-preco-base').innerText = "Preço Base: " + precoBase + "€";
+        document.getElementById('info-desconto').innerText = "Desconto: -" + desconto + "€";
+        document.getElementById('info-preco-final').innerText = "Total Líquido: " + precoFinal + "€";
+        
+        // Condicional (If/Else)
+        document.getElementById('info-status').innerHTML = "Status do Nó: " + 
+            (stock > 0 ? '<span style="color: #34d399; font-weight: bold;">● ONLINE</span>' : '<span style="color: #f87171; font-weight: bold;">○ OFFLINE</span>');
+
+        // Loop do Array (.map nativo)
+        const containerLista = document.getElementById('lista-servidores');
+        servidores.forEach(function(item) {
+            const div = document.createElement('div');
+            div.className = 'list-item';
+            div.onclick = function() { gerirSelecao(item); };
+            div.innerHTML = '<span>🖥️ ' + item + '</span><span class="btn-text">Focar</span>';
+            containerLista.appendChild(div);
+        });
+    </script>
+</body>
+</html>
